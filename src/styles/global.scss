@@ -1,0 +1,55 @@
+:root {
+     --white: #FFFFFF;
+     --gray-100: #e1e1e6;
+     --gray-300: #a8a8b3;
+     --gray-900: #121214;
+
+     --cyan-500: #61dafb;
+     --yelow-500: #eba417;
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ html {
+     @media(max-width: 1080px) {
+         font-size: 93.75%;
+     }
+     
+     @media(max-width: 720px) {
+         font-size: 87.5%;
+     }
+
+ }
+ body,input,select,textarea,button {
+     font-family: 'Roboto', sans-serif;
+     font-weight: 400;
+     font-size: 1rem;
+ }
+
+ h1, h2, h3, h4, h5, h6, strong {
+     font-weight: 600;
+ }
+
+ body {
+     background: var(--gray-900);
+     color: var(--white);
+     -webkit-font-smoothing: antialiased;
+ }
+
+ button {
+     cursor: pointer;
+ }
+
+ a { 
+     color: inherit;
+     text-decoration: none;
+ }
+
+ [disabled] {
+     opacity:0.6;
+     cursor: not-allowed;
+ }
