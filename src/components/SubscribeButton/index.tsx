@@ -18,9 +18,12 @@ export function SubscribeButton({priceId}: SubscribeButtonProps) {
 
     // cria checkout stripe
     try { 
+      console.log('index');
+      
       const response = await api.post('/subscribe');
 
-      // console.log(response);
+      console.log('index02');
+      
 
       const { sessionId } = response.data;
 
