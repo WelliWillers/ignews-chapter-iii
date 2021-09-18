@@ -1,4 +1,5 @@
-import { session, signIn } from 'next-auth/client';
+import { session, signIn, useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import { api } from '../../services/api';
 import { getStripeJs } from '../../services/stripe-js';
 import styles from './styles.module.scss';
@@ -9,6 +10,9 @@ interface SubscribeButtonProps {
 
 export function SubscribeButton({priceId}: SubscribeButtonProps) {
 
+  const [session] = useSession();
+  const router = useRouter();
+
   async function handleSubscribe(){
 
     if(!session) {
@@ -16,25 +20,22 @@ export function SubscribeButton({priceId}: SubscribeButtonProps) {
       return;
     }
 
+    if(session.activeSubscription){
+      router.push('/posts');
+      return;
+    }
+
     // cria checkout stripe
     try { 
-      console.log('index');
-      
       const response = await api.post('/subscribe');
-
-      console.log('index02');
-      
 
       const { sessionId } = response.data;
 
       const stripe = await getStripeJs();
 
       await stripe.redirectToCheckout({ sessionId });
-      
     } catch (error) {
-
       alert(error.message);
-      
     }
   }
 
