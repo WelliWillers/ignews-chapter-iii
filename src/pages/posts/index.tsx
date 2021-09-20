@@ -7,6 +7,8 @@ import { RichText } from 'prismic-dom';
 
 import { getPrismicioClient } from '../../services/prismic';
 import styles from './styles.module.scss';
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/client';
 
 interface Post {
     slug: string;
@@ -20,6 +22,20 @@ interface PostsProps {
 }
 
 export default function Posts({posts}: PostsProps){
+
+    const [session] = useSession();
+    const [linkPrefix, setLinkPrefix] = useState('');
+
+    useEffect(() => {
+        if(session?.activeSubscription){
+            setLinkPrefix('');
+        } else {
+            setLinkPrefix('preview');
+        }
+    }, [session]);
+
+    console.log(linkPrefix);
+
     return (
         <>
             <Head>
@@ -30,8 +46,8 @@ export default function Posts({posts}: PostsProps){
                 <div className={styles.posts}>
 
                     { posts.map(post => (
-                        <Link href={`/posts/${post.slug}`}>
-                            <a key={post.slug}>
+                        <Link key={post.slug} href={`/posts/${linkPrefix}/${post.slug}`}>
+                            <a >
                                 <time>
                                     {post.updateAt}
                                 </time>

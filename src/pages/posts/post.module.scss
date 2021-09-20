@@ -45,3 +45,21 @@
     }
 
 }
+
+.continueReading {
+    padding : 2rem;
+    text-align: center;
+    background: var(--gray-700);
+    border-radius: 100px;
+
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    margin: 4rem 0 2rem;
+
+    a {
+        color: var(--yelow-500);
+        margin-left: 1rem;
+    }
+
+}
