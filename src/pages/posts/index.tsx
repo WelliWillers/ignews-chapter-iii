@@ -30,11 +30,9 @@ export default function Posts({posts}: PostsProps){
         if(session?.activeSubscription){
             setLinkPrefix('');
         } else {
-            setLinkPrefix('preview');
+            setLinkPrefix('preview/');
         }
     }, [session]);
-
-    console.log(linkPrefix);
 
     return (
         <>
@@ -46,8 +44,8 @@ export default function Posts({posts}: PostsProps){
                 <div className={styles.posts}>
 
                     { posts.map(post => (
-                        <Link key={post.slug} href={`/posts/${linkPrefix}/${post.slug}`}>
-                            <a >
+                        <Link key={post.slug} href={`/posts/${linkPrefix}${post.slug}`}>
+                            <a>
                                 <time>
                                     {post.updateAt}
                                 </time>

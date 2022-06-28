@@ -10,7 +10,7 @@ import { stripe } from '../services/stripe';
 interface productProps {
   product: {
     priceId: string,
-    amount: number,
+    amount: string,
   }
 }
 
@@ -30,7 +30,7 @@ export default function Home({product}: productProps) {
             Get acess to all publications <br />
             <span>for {product.amount} month</span>
           </p>
-          <SubscribeButton priceId={product.priceId} />
+          <SubscribeButton />
         </section>
 
         <img src="/images/avatar.svg" alt="" />
