@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
+import { getSession, useSession } from 'next-auth/client'
 import {mocked} from 'ts-jest/utils'
 import Posts, { getStaticProps } from '../../pages/posts'
 import {getPrismicioClient} from '../../services/prismic'
@@ -13,15 +14,21 @@ const posts = [
 ]
 
 jest.mock('../../services/prismic')
+// jest.mock('next-auth/client')
 
-describe('Posts page', () => {
-    it('renders correctly', async () => {
+describe('Posts page',() => {
+    it('renders correctly', () => {
+        
+        // const useSessionMocked = mocked(useSession)
+        // useSessionMocked.mockReturnValueOnce([null, false])
 
-        render(<Posts 
-            posts={posts}
-        />)
+        const { getByText } = render(
+            <Posts 
+                posts={posts}
+            />
+        )
 
-        expect(screen.getByText('Post Title')).toBeInTheDocument()
+        expect(getByText('Post Title')).toBeInTheDocument()
     })
 
 
